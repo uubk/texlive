@@ -1,0 +1,20 @@
+name: Build container
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  build:
+    name: Build docker container
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Build container
+        run: docker build -t docker.pkg.github.com/uubk/texlive/texlive:latest
+      - name: Publish container
+        run: |
+          docker login docker.pkg.github.com -u publisher -p "${GITHUB_PACKAGE_REGISTRY_TOKEN}"
+          docker push docker.pkg.github.com/uubk/texlive/texlive:latest
+        env:
+          GITHUB_PACKAGE_REGISTRY_TOKEN: ${{ secrets.GITHUB_PACKAGE_REGISTRY_TOKEN }}
