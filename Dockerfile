@@ -8,7 +8,7 @@ RUN apt update && \
   dpkg-reconfigure locales && \
   ln -sf /usr/share/zoneinfo/Europe/Zurich /etc/localtime && \
   dpkg-reconfigure tzdata && \
-  apt install -y texlive git && \
+  apt install -y texlive git make && \
   rm -Rf /var/lib/apt/lists/*
 
 ENV LANG en_US.UTF-8
