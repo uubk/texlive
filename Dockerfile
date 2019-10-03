@@ -8,7 +8,9 @@ RUN apt update && \
   dpkg-reconfigure locales && \
   ln -sf /usr/share/zoneinfo/Europe/Zurich /etc/localtime && \
   dpkg-reconfigure tzdata && \
-  apt install -y texlive texlive-latex-extra texlive-full git make && \
+  apt install -y texlive texlive-latex-extra git make
+
+RUN apt install -y texlive-full && \
   rm -Rf /var/lib/apt/lists/*
 
 ENV LANG en_US.UTF-8
